@@ -8,7 +8,7 @@ function getRepositories() {
 
 function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText);
-  console.log(repos);
+  console.log("repos=", repos);
   const repoList = `<ul>${repos.map(repo => '<li><a href="' + repo.html_url + '">' +
     repo.name + '</a> - <a href="#" data-repository="' + repo.name +
     '" data-username="' + repo.owner.login +
@@ -32,9 +32,9 @@ function getCommits(el) {
 
 function displayCommits() {
   const commits = JSON.parse(this.responseText);
-  console.log(commits);
+  console.log("commits=", commits);
   const commitsList = `<ul>${commits.map(commit =>
-    '<li>'+ (commit.author.login|| "") + '(' + commit.commit.author.name + ') - ' +
+    '<li>'+ (commit.author.login ? commit.author.login: "") + '(' + commit.commit.author.name + ') - ' +
     commit.commit.message + '</li>').join('')}</ul>`
   document.getElementById("details").innerHTML=commitsList;
 }
